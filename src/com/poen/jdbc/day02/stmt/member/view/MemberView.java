@@ -57,13 +57,20 @@ public class MemberView {
 			case 5 : 
 				// 아이디 입력받기
 				memberId = inputMemberId();
+				// 입력받은 아이디로 회원 정보가 존재하는지 체크하기
+				member = mController.findOneById(memberId);
+				if(member != null) {
+					
 				// 디비에서 정보 삭제하도록 요청하기
 				result = mController.deleteMember(memberId);
 				// 결과에 따른 메시지 출력하기
 				if(result > 0) {
 					printMessage("회원 정보 삭제가 완료되었습니다");
 				}else {
-					printMessage("회원 정보 삭제가 완료되지 않았습니다");					
+					this.printMessage("회원 정보 삭제가 완료되지 않았습니다");					
+				}
+				}else {
+					this.printMessage("해당 정보가 존재하지 않습니다.");
 				}
 				break;
 			case 0 : 
